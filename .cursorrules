@@ -1,0 +1,8 @@
+In this project, use the following rules:
+
+1. About the project:
+- This project is productivity tool for people who are looking for jobs and internships, it is solving the problem of people not being aware of thier current progress in the job search process, for example, they might not know that they have applied to 100 jobs, or they might not know that they have 3 interviews coming up, people make a resolultion to learn a skill but dont do it, and they have no idea how are lgging behind, this platform will help people in being aware of thier current progress and help them in being more productive, by tracking their progress and providing them with analytics and insights, it will help them in being more productive and achieving thier goals, it will also allow them to collaborate and learn with thier fellow peers, this repo is the backend for the platform, it is built with Hono and Prisma, and it is deployed on Cloudflare Workers.
+
+2. About the code:
+ - this repo will have the backend code for the platform, it will be built with Hono and Prisma, and it will be deployed on Cloudflare Workers, use the best practices for building a backend, and use the best practices for building a backend with Hono and Prisma, the code should be clean, maintainable and highly sclable, it should follow the standard architecture for a backend, and it should be optimized for performance, it should be highly secure with all the edege cases taken into account, it should be highly scalable, and it should be highly maintainable, the code should be well documented and should be easy to understand and maintain.
+ 

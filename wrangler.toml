@@ -1,10 +1,12 @@
 name = "track-trails-backend"
 main = "src/index.ts"
 compatibility_date = "2025-01-24"
-
-# compatibility_flags = [ "nodejs_compat" ]
+compatibility_flags = [ "nodejs_compat" ]
 
 # [vars]
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiZDkxMzViZWMtYmY5MS00N2FjLThjZWQtNzZjNGMyODZjMjlmIiwidGVuYW50X2lkIjoiNjU2MTJlZjY3NTg2MmIxZmQyYjJlYWIxOGYyYjEwMzVhMzRhMjU2YzJlYTFjN2U0ZWRjYzAwZmI5YzVmNzZhOCIsImludGVybmFsX3NlY3JldCI6ImRlMmVhMDQyLWU5YjAtNGQ1MC04N2QwLWQzY2M3Yjg3YjExMiJ9.z264k7izHIh9jPQ7RFV2UdKBjAfvp6bxAyRrMIq6bSg"
+
+DIRECT_DATABASE_URL="postgresql://neondb_owner:npg_S1XGc3opPgQM@ep-calm-cake-a1uw3exu-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
 # MY_VAR = "my-variable"
 
 # [[kv_namespaces]]
@@ -26,3 +28,11 @@ compatibility_date = "2025-01-24"
 # [observability]
 # enabled = true
 # head_sampling_rate = 1
+
+# [[rules]]
+# type = "ESModule"
+# globs = ["**/*.js"]
+
+# [[rules]]
+# type = "CompiledWasm"
+# globs = ["**/prisma-client-*.wasm"]
