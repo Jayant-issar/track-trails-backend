@@ -36,7 +36,7 @@ model Application {
   status       ApplicationStatus
   method       ApplicationMethod
   appliedDate  DateTime
-  lastUpdated  DateTime
+  lastUpdated  DateTime?         @default(now())
   notes        String?
   contactEmail String?
   contactName  String?
