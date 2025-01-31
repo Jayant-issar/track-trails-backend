@@ -43,10 +43,10 @@ export async function authMiddleware(
         c.set('sessionClaims', authState.toAuth());
         c.set('isSignedIn', authState.isSignedIn);
 
-        console.log("✅ User authenticated:", { 
-            auth: authState.toAuth(),
-            isSignedIn: authState.isSignedIn 
-        });
+        // console.log("✅ User authenticated:", { 
+        //     auth: authState.toAuth(),
+        //     isSignedIn: authState.isSignedIn 
+        // });
 
         await next();
     } catch (error) {
