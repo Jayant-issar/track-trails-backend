@@ -6,12 +6,11 @@ export const createApplicationService = async (clerkId:string,applicationData:Ap
     try {
         const application = await db.application.create({
             data:{
-                appliedDate:applicationData.appliedDate,
+                appliedDate: new Date(applicationData.appliedDate),
                 companyName:applicationData.companyName,
                 position:applicationData.position,
                 status:applicationData.status,
                 method:applicationData.method,
-                lastUpdated:applicationData.lastUpdated,
                 notes:applicationData.notes,
                 contactEmail:applicationData.contactEmail,
                 contactName:applicationData.contactName,
@@ -25,6 +24,8 @@ export const createApplicationService = async (clerkId:string,applicationData:Ap
         })
         return application
     } catch (error) {
+        console.log("Error in createApplicationService = ",error);
+        
         throw new Error("Failed to create application")
     }
     
