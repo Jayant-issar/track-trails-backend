@@ -2,39 +2,41 @@ import { db } from "../../utils/prisma";
 import { PreparationMetric } from "../types/prepTracker";
 
 
-export const createPrepMetricService = async (clerkId:string,prepMetricData:Omit<PreparationMetric, "id" | "progress" | "createdAt">) => {
-    console.log("🟢 Create Prep Metric Service Started");
-        
+export const createPrepMetricService = async (
+    clerkId: string,
+    prepMetricData: Omit<PreparationMetric, "id" | "progress" | "createdAt">
+) => {
     try {
-            const newPrepMetric = await db.preparationMetric.create({
-                data:{
-                    name:prepMetricData.name,
-                    targetPerDay:{
-                        create:{
-                            value:prepMetricData.targetPerDay.value,
-                            label:prepMetricData.targetPerDay.label
-                        }
-                    },
-                    user:{
-                        connect:{
-                            clerkId
-                        }
-                    }
-
-
-                },
-                include:{
-                    progress:true,
-                    targetPerDay:true
-                }
-            })
-            console.log("🟢 New Prep Metric Created = ",newPrepMetric);
-            return newPrepMetric;
-        } catch (error) {
-            console.log("🔴 Error in createPrepMetricService = ",error);
-            throw new Error("Failed to create prep metric");
-
+        // Validate clerkId exists before proceeding
+        if (!clerkId) {
+            throw new Error("User not authenticated");
         }
+
+        const newPrepMetric = await db.preparationMetric.create({
+            data: {
+                name: prepMetricData.name,
+                targetPerDay: {
+                    create: {
+                        value: prepMetricData.targetPerDay.value,
+                        label: prepMetricData.targetPerDay.label
+                    }
+                },
+                user: {
+                    connect: {
+                        clerkId: clerkId // Ensure this matches your User model field name
+                    }
+                }
+            },
+            include: {
+                progress: true,
+                targetPerDay: true
+            }
+        });
+        return newPrepMetric;
+    } catch (error) {
+        console.error("🔴 Error in createPrepMetricService:", error);
+        throw new Error("Failed to create prep metric");
+    }
 }
 
 export const getDailyMetricService = async (clerkId:string, metricId:string)=>{
