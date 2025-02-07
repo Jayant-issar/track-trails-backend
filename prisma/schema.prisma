@@ -68,8 +68,8 @@ model PreparationMetric {
   userId      String
   user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   name        String
-  targetPerDay PreparationMetricUnit[]
-  progress    PreparationProgress[]
+  targetPerDay PreparationMetricUnit[]  
+  progress    PreparationProgress[]  // Changed to array for multiple daily entries
   createdAt   DateTime             @default(now())
   updatedAt   DateTime             @updatedAt
 }
@@ -78,16 +78,16 @@ model PreparationMetricUnit {
   id       String  @id @default(cuid())
   value    Int
   label    String
-  metricId String  @unique
-  metric   PreparationMetric @relation(fields: [metricId], references: [id])
+  metricId String  
+  metric   PreparationMetric @relation(fields: [metricId], references: [id], onDelete: Cascade)
 }
 
 model PreparationProgress {
-  id        String   @id @default(cuid())
-  date      DateTime
+  id        String   @id @default(cuid()) 
+  date      DateTime @default(now())
   achieved  Int
-  metricId  String   @unique
-  metric    PreparationMetric @relation(fields: [metricId], references: [id])
+  metricId  String
+  metric    PreparationMetric @relation(fields: [metricId], references: [id], onDelete: Cascade)
 }
 
 enum ApplicationStatus {
