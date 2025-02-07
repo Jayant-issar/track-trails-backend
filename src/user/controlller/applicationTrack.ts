@@ -8,9 +8,13 @@ export const createApplicationController = async (c:Context)=>{
         const sessionClaims = c.get('sessionClaims'); //get the session claims set by auth middleware
         const validatedData = c.get('validatedData');
         console.log('sessionClaims = ',sessionClaims);
-        console.log('validatedData = ',validatedData);
-
-        const clerkId = sessionClaims.userId;
+        console.log('validatedData = ',validatedData)
+        // Clerk stores user ID in 'sub' claim
+        const clerkId = sessionClaims.sub; // Changed from userId to sub
+        
+        if (!clerkId) {
+            return c.json({ message: 'User not authenticated', success: false }, 401);
+        }
 
         const newApplication = await createApplicationService(clerkId,validatedData);
 
