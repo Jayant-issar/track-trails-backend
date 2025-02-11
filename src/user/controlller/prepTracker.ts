@@ -112,7 +112,11 @@ export const updateDailyProgressController = async (c: Context) => {
         }
         const metricId = c.req.query().metricId;
         const { delta } = await c.req.json();
-
+        
+        if (!delta) {
+            return c.json({ message: 'Delta required', success: false }, 400);
+        }
+        
         if (!metricId) {
             return c.json({ message: 'Metric ID required', success: false }, 400);
         }
