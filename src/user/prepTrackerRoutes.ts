@@ -40,16 +40,8 @@ prepTrackerApp.get("/getall/:clerkId",async (c)=>{
 
 prepTrackerApp.get('/metrics/daily', getDailyMetricController);
 prepTrackerApp.get('/metrics', getAllUserMetricsController);
-prepTrackerApp.patch('/metrics/progress', updateDailyProgressController);
+prepTrackerApp.patch('/metrics/progress', authMiddleware,updateDailyProgressController);
 prepTrackerApp.delete('/metrics', deleteMetricController);
-
-
-
-
-
-
-
-
 
 prepTrackerApp.get("/",(c)=>{
     return c.json({
