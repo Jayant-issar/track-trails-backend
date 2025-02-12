@@ -26,7 +26,8 @@ export async function authMiddleware(c: Context<{ Bindings: Env; Variables: Vari
         
         // Verify JWT
         const { payload } = await jwtVerify(token, JWKS, {
-            issuer: c.env.CLERK_JWT_ISSUER
+            issuer: c.env.CLERK_JWT_ISSUER,
+            clockTolerance: 15 //add 15 seconds of leeway to the expiration time
         });
 
         // Set session claims

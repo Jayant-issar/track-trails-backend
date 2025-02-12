@@ -31,3 +31,20 @@ export const createApplicationService = async (clerkId:string,applicationData:Ap
     
     
 }
+
+export const getApplicationsService = async (clerkId:string)=>{
+    try {
+        const applications = await db.application.findMany({
+            where:{
+                user:{
+                    clerkId
+                }
+            }
+        })
+        return applications
+    } catch (error) {
+        console.log("Error in getApplicationsService = ",error);
+        throw new Error("Failed to get applications")
+    }
+}
+

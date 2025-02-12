@@ -36,3 +36,20 @@ export const createColdOutReachService = async (clerkId:string,coldOutReachData:
 
     }
 }
+
+export const getColdOutReachService = async (clerkId:string)=>{
+    try {
+        const coldOutReachs = await db.coldApproach.findMany({
+            where:{
+                user:{
+                    clerkId
+                }
+            }
+        })
+        return coldOutReachs;
+    } catch (error) {
+        console.log("🔴 There was an error in getColdOutreachService");
+        throw new Error("Failed to get cold outreach"+ error);
+        
+    }
+}

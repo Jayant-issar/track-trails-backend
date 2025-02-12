@@ -33,6 +33,8 @@ export const validateApplication: MiddlewareHandler = async (c, next) => {
     c.set('validatedData', validated);
     await next();
   } catch (error) {
+    console.log(error);
+    
     if (error instanceof z.ZodError) {
       return c.json({
         success: false,
