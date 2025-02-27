@@ -1,6 +1,6 @@
 import { Context } from "hono";
 import { PreparationMetric } from "../types/prepTracker";
-import { createPrepMetricService, deleteMetricService, getAllUserMetricsService, getDailyMetricService, updateDailyProgressService } from "../services/prepTracker";
+import { createPrepMetricService, deleteMetricService, getAllUserMetricsService, getDailyMetricService, getMetricDetailsService, updateDailyProgressService } from "../services/prepTracker";
 
 
 
@@ -162,6 +162,29 @@ export const deleteMetricController = async (c: Context) => {
         console.log("🔴 Error in deleteMetricController: ", error);
         return c.json({
             message: error instanceof Error ? error.message : 'Failed to delete metric',
+            success: false
+        }, 500);
+    }
+}
+
+export const getMetricDetailsController = async (c:Context) => {
+    try {
+        const metricId  =  c.req.query().metricId;
+        if(!metricId){
+            return c.json({ message: 'Metric ID required', success: false }, 400);
+        }
+
+        const metricDetails = await getMetricDetailsService(metricId);
+
+        return c.json({
+            message:"Metric Details Fetched Succesfully",
+            data:metricDetails,
+            success:true,
+        },200)
+    } catch (error) {
+        console.log("🔴 Error in getMetricDetailsController ", error);
+        return c.json({
+            message: error instanceof Error ? error.message : ' failed to get metric details',
             success: false
         }, 500);
     }
