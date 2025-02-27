@@ -4,7 +4,7 @@ import userRouter from './user/userRouter'
 import { cors } from 'hono/cors'
 
 const app = new Hono()
-app.use("*", cors({ origin: 'http://localhost:8080' }))
+app.use("*", cors({ origin: ["http://localhost:8080","https://track-trails.pages.dev"] }))
 
 app.route('/user', userRouter)
 app.get('/', async (c) => {
