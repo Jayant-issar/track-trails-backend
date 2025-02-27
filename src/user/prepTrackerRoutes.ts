@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { authMiddleware } from "./middlewares/authMiddlware";
 import { validatePrepMetricInput } from "./middlewares/prepTracker";
-import { createPrepMetricController, deleteMetricController, getAllUserMetricsController, getDailyMetricController, updateDailyProgressController } from "./controlller/prepTracker";
+import { createPrepMetricController, deleteMetricController, getAllUserMetricsController, getDailyMetricController, getMetricDetailsController, updateDailyProgressController } from "./controlller/prepTracker";
 import { db } from "../utils/prisma";
 
 
@@ -42,6 +42,7 @@ prepTrackerApp.get('/metrics/daily', getDailyMetricController);
 prepTrackerApp.get('/metrics', getAllUserMetricsController);
 prepTrackerApp.patch('/metrics/progress', authMiddleware,updateDailyProgressController);
 prepTrackerApp.delete('/metrics', deleteMetricController);
+prepTrackerApp.get("/metricDetails", authMiddleware, getMetricDetailsController)
 
 prepTrackerApp.get("/",(c)=>{
     return c.json({
