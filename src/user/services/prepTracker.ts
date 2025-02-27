@@ -254,3 +254,20 @@ export const deleteMetricService = async (clerkId:string, metricId:string)=>{
     }
 
 }
+
+export const getMetricDetailsService = async (metricId:string)=>{
+    try {
+        const metricDetails = await db.preparationMetric.findUnique({
+            where:{id:metricId},
+            include:{
+                progress:true,
+                targetPerDay:true,
+            }
+        })
+        return metricDetails
+    } catch (error) {
+        
+        throw new Error("There was an error in getMetricDetailsService: "+ error)
+        
+    }
+}
