@@ -1,4 +1,4 @@
-export type ApplicationStatus = 'accepted' | 'waiting' | 'ghosting' | 'rejected' | 'interviewing';
+export type ApplicationStatus = 'accepted' | 'waiting' | 'ghosted' | 'rejected' | 'interviewing';
 
 export enum ApplicationMethod {
     Email = 'email',
